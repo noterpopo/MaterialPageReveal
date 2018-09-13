@@ -36,12 +36,17 @@ class PagerIndicator extends StatelessWidget{
         ),
       );
     }
+
+
     return new Column(
       children: <Widget>[
         new Expanded(child: new Container()),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: bubbles,
+        new Transform(
+          transform: new Matrix4.translationValues(0.0, 0.0, 0.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: bubbles,
+          ),
         )
       ],
     );
@@ -72,24 +77,27 @@ class PageBubble extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: new Container(
-        width: lerpDouble(20.0,45.0,viewModel.activePercent),
-        height: lerpDouble(20.0,45.0,viewModel.activePercent),
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          color: viewModel.isHollow
-            ?const Color(0x88FFFFFF).withAlpha((0x88*viewModel.activePercent).round())
-            :const Color(0x88FFFFFF),
-          border: new Border.all(
+    return new Container(
+      width: 65.0,
+      height: 65.0,
+      child: new Center(
+        child: new Container(
+          width: lerpDouble(20.0,45.0,viewModel.activePercent),
+          height: lerpDouble(20.0,45.0,viewModel.activePercent),
+          decoration: new BoxDecoration(
+            shape: BoxShape.circle,
             color: viewModel.isHollow
-                ?const Color(0x88FFFFFF).withAlpha((0x88*(1.0-viewModel.activePercent)).round())
-                :Colors.transparent,
-            width: 3.0
-          )
+              ?const Color(0x88FFFFFF).withAlpha((0x88*viewModel.activePercent).round())
+              :const Color(0x88FFFFFF),
+            border: new Border.all(
+              color: viewModel.isHollow
+                  ?const Color(0x88FFFFFF).withAlpha((0x88*(1.0-viewModel.activePercent)).round())
+                  :Colors.transparent,
+              width: 3.0
+            )
+          ),
+          child: new Opacity(opacity: viewModel.activePercent,child: new Image.asset(viewModel.iconAssetPath,color: viewModel.color,)),
         ),
-        child: new Opacity(opacity: viewModel.activePercent,child: new Image.asset(viewModel.iconAssetPath,color: viewModel.color,)),
       ),
     );
   }
