@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
   StreamController<SlideUpdate> slideUpdateStream;
   AnimatedPageDragger animatedPageDragger;
 
-  int activeIndex=0;
+  int activeIndex=1;
   int nextPageIndex=0;
   SlideDirection slideDirection=SlideDirection.none;
   double slidePercent=0.0;
