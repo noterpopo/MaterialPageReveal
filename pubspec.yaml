@@ -61,3 +61,6 @@ flutter:
         - asset: assets/fonts/Flamante-Roma-Medium.ttf
         - asset: assets/fonts/Flamante-Roma-MediumItalic.ttf
           style: italic
+    - family: hdx
+      fonts:
+        - asset: assets/fonts/hdx.ttf

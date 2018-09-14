@@ -111,12 +111,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
               precentVisible: slidePercent,
             ),
           ),
-          new PagerIndicator(
-            viewModel: new PagerIndicatorViewModel(
-              pages,
-              activeIndex,
-              slideDirection,
-              slidePercent
+          new Padding(
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: new PagerIndicator(
+              viewModel: new PagerIndicatorViewModel(
+                pages,
+                activeIndex,
+                slideDirection,
+                slidePercent
+              ),
             ),
           ),
           new PageDragger(

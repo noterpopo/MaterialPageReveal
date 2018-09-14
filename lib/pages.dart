@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:material_page_reveal/vertical_text.dart';
 
 final pages=[
-  new PageViewModel(const Color(0xFF678FB4), 'assets/hotels.png', 'Hotels', 'All hotels and hostels are sorted by hospitality rating', 'assets/key.png'),
-  new PageViewModel(const Color(0xFF65B0B4), 'assets/banks.png', 'Banks', 'We carefully verify all banks before adding them into the app', 'assets/wallet.png'),
-  new PageViewModel(const Color(0xFF9B90BC), 'assets/stores.png', 'Store', 'All local stores are categorized for your convenience', 'assets/shopping_cart.png'),
+  new PageViewModel(const Color(0xFF2775B6), '景泰藍','JingTaiLan','#2775B6','assets/key.png'),
+  new PageViewModel(const Color(0xFFEBA0B3), '芍藥耕紅', 'ShaoYaoGengHong','#EBA0B3','assets/wallet.png'),
+  new PageViewModel(const Color(0xFF862617), '赭石', 'ZheShi','#862617','assets/shopping_cart.png'),
 ];
 class Page extends StatelessWidget{
 
@@ -16,6 +17,7 @@ class Page extends StatelessWidget{
   });
   @override
   Widget build(BuildContext context) {
+    var textLen=viewModel.colorName.length;
     return new Container(
       width: double.infinity,
       color: viewModel.color,
@@ -24,32 +26,34 @@ class Page extends StatelessWidget{
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            new Expanded(child: new Container()),
             new Transform(
               transform: new Matrix4.translationValues(0.0, 50.0*(1.0-precentVisible), 0.0),
               child: new Padding(
-                child: new Image.asset(viewModel.heroAssetPath,width: 200.0,height: 200.0,),
-                padding: new EdgeInsets.only(bottom: 25.0),),
+                child: new VerticalText(
+                  text: viewModel.colorName,
+                ),
+                padding: new EdgeInsets.only(bottom: 20.0*(5-textLen)),),
             ),
             new Transform(
               transform: new Matrix4.translationValues(0.0, 30.0*(1.0-precentVisible), 0.0),
               child: new Padding(
-                padding: new EdgeInsets.only(top: 10.0,bottom: 10.0),
-                child: new Text(viewModel.title,style: new TextStyle(
+                padding: new EdgeInsets.only(bottom: 10.0),
+                child: new Text(viewModel.pingyin,style: new TextStyle(
                     color: Colors.white,
-                    fontFamily: 'FlamanteRoma',
-                    fontSize: 34.0
+                    fontSize: 22.0
                 ),),
               ),
             ),
             new Transform(
               transform: new Matrix4.translationValues(0.0, 50.0*(1.0-precentVisible), 0.0),
               child: new Padding(
-                padding: new EdgeInsets.only(bottom: 75.0),
-                child: new Text(viewModel.body,
+                padding: new EdgeInsets.only(top:25.0,bottom: MediaQuery.of(context).size.height*0.24),
+                child: new Text(viewModel.RGBCode,
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                       color: Colors.white,
-                      fontSize: 18.0
+                      fontSize: 34.0
                   ),),
               ),
             )
@@ -62,16 +66,13 @@ class Page extends StatelessWidget{
 
 class PageViewModel{
   final Color color;
-  final String heroAssetPath;
-  final String title;
-  final String body;
+  final String colorName;
+  final String pingyin;
+  final String RGBCode;
   final String iconAssetIcon;
 
-  PageViewModel(
-      this.color,
-      this.heroAssetPath,
-      this.title,
-      this.body,
-      this.iconAssetIcon
-      );
+  PageViewModel(this.color, this.colorName, this.pingyin, this.RGBCode,
+      this.iconAssetIcon);
+
+
 }
