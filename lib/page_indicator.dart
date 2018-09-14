@@ -37,12 +37,20 @@ class PagerIndicator extends StatelessWidget{
       );
     }
 
+    final BUBBLE_WIDTH=55.0;
+    final baseTranslation=(viewModel.pages.length*BUBBLE_WIDTH)/2-(BUBBLE_WIDTH/2);
+    var translation=baseTranslation-(viewModel.activeIndex*BUBBLE_WIDTH);
+    if(viewModel.slideDirection==SlideDirection.leftToRight){
+      translation+=BUBBLE_WIDTH*viewModel.slidePercent;
+    }else if(viewModel.slideDirection==SlideDirection.rightToLeft){
+      translation-=BUBBLE_WIDTH*viewModel.slidePercent;
+    }
 
     return new Column(
       children: <Widget>[
         new Expanded(child: new Container()),
         new Transform(
-          transform: new Matrix4.translationValues(0.0, 0.0, 0.0),
+          transform: new Matrix4.translationValues(translation, 0.0, 0.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: bubbles,
@@ -78,7 +86,7 @@ class PageBubble extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return new Container(
-      width: 65.0,
+      width: 55.0,
       height: 65.0,
       child: new Center(
         child: new Container(
